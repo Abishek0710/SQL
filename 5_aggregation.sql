@@ -57,6 +57,17 @@ select region,category, sum(sales) as tot_sales
 from orders
 group by region; # this will give error as we should include columns that are used in select in group by
 # we have 2 non aggregated columns here so we need to include those two in group by else we will get error.
+# whatever columns used in select should be used in group by 
+# We can use columns not present in select in group by clause but every column present in select should be present in groub by 
+
+
+
+select region, sum(sales) as tot_sales
+from orders
+group by region, category; # This query is correct
+# Here we are using columns in group by that are not used in select 
+# But if columns in select list is not present in group by it will throw error
+
 
 
 # interview qn
