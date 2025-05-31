@@ -50,3 +50,43 @@ select * from rank_sales
 where rnk<=5;
 
 
+# lead function
+
+select *,
+lead(salary,2, salary) over(order by salary asc) as lead_emp # it gives the salary of 2nd next row
+from employee;
+
+# lead(salary,2, salary) fetch the salary of 2nd next row if there is no row then takes the salary itself
+
+
+select *,
+lead(salary,1) over(partition by dept_id order by salary asc) as lead_emp 
+from employee;
+
+
+#Lag function
+# lag is similar to lead but in lag it fetches previous values
+
+select *,
+lag(salary,1) over(partition by dept_id order by salary desc) as lag_emp,
+lead(salary,1) over(partition by dept_id order by salary desc) as lead_emp 
+from employee;
+
+
+select *,
+lag(salary,1, 1) over(partition by dept_id order by salary desc) as lag_emp,
+lead(salary,1,1) over(partition by dept_id order by salary desc) as lead_emp 
+from employee;
+
+
+# first value function
+# it gives the first value of the partition
+select *,
+first_value(salary) over(partition by dept_id order by salary desc) as first_val
+from employee;
+
+
+
+select *,
+last_value(salary) over(partition by dept_id order by salary asc) as first_val
+from employee;
