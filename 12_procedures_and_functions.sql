@@ -92,7 +92,53 @@ call sp_emp(100, @total);
 select @total as total_emp;
 
 
+# FUNCTIONS
 
+delimiter $$
+create function fn_product(a int, b int)
+returns integer
+deterministic 
+begin
+return (select a*b);
+end $$
+delimiter ;
+
+
+select fn_product(4,5);
+
+# to see all the databases and tables present in the DBMS
+
+select * from information_schema.tables;
+
+
+select quantity, sales, fn_product(quantity, sales) as fn_sample from orders;
+
+drop function fn_product;
+# to drop a function
+
+# in mysql providing default value in input for fuction is not supported
+
+
+
+
+
+
+# PIVOT AND UNPIVOT
+
+select category,
+sum(case when year(order_date) = 2020 then sales end) as sales_2020,
+sum(case when year(order_date) = 2021 then sales end) as sales_2021
+from orders
+group by category;
+
+# the above results can be obtained using pivot
+
+
+/*This is not supported in mysql
+select * from 
+(select category, year(order_date) as yod, sales
+from orders)  as tbl1
+pivot (sum(sales) for yod in ([2020], [2021]) ) as tbl2 */
 
 
 
