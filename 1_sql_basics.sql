@@ -11,10 +11,14 @@ total decimal(5,2) , /*total length is 5 out of that 2 is decimal*/
 payment_method varchar(20)
 );
 
+
 # storing data into the table
 
 insert into amazon_orders values( 1, '2023-10-15', 'shirt', 550.50, 'UPI');
 insert into amazon_orders values( 2, '2023-10-16', 'pant', 900.50, 'credit card');
+insert into amazon_orders values( 3, '2023-12-20', 'chair', 900.00, 'COD');
+insert into amazon_orders values( 4, '2024-01-11', 'spray', 300, 'UPI');
+
 
 # selecting rows from a table
 select * from amazon_orders;

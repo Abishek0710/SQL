@@ -1,5 +1,5 @@
 # Constraints
-
+use  namastesql;
 create table a_orders
 (
 order_id integer unique Not null, # every record should be unique and not null
@@ -21,7 +21,7 @@ insert into a_orders values(1, '2022-10-01','purse',200,"cod",20,null);
 # will give error as we have check constraint for payment_method column
 
 insert into a_orders values(3, '2022-10-01','purse',200,"UPI",20,category); 
-insert into a_orders values(3, '2022-10-01','purse',200,"UPI",20,default);
+insert into a_orders values(4, '2022-10-01','purse',200,"UPI",20,default);
 # this will take the default value from the column
 
 insert into a_orders values(1, '2022-10-01','purse',200,"UPI"); 
@@ -50,7 +50,9 @@ total decimal(5,2) , /*total length is 5 out of that 2 is decimal*/
 payment_method varchar(20) check (payment_method in ('UPI', 'credit card')) default 'UPI',  # check constraint will make sure any other value other than the values will not be executed
 discount integer check (discount <= 20),
 category varchar(30) default 'essentials',
-primary key(order_id,product_name)); #primary key is mentioned at last to give combination of primary key
+primary key(order_id,product_name)
+); 
+#primary key is mentioned at last to give combination of primary key
 # order_id,product_name this combination should be not null and unique
 # difference between unique and primary key is unique can have 1 null value but primary key cannot
 

@@ -1,5 +1,8 @@
 # PROCEDURES
 
+use namastesql;
+
+
 DELIMITER $$
 
 CREATE PROCEDURE sp_emp()
@@ -12,7 +15,7 @@ DELIMITER ;
 
 call sp_emp;
 
-# we cannot alyer a procedure in mysql so we will drop and create again
+# we cannot alter a procedure in mysql so we will drop and create again
 
 drop procedure sp_emp;
 
@@ -45,8 +48,11 @@ select * from dept;
 
 drop procedure sp_emp;
 
+
+
+
 delimiter $$
-create procedure sp_emp(in dept_id_val int, out cnt int )
+create procedure sp_emp(in dept_id_val int)
 begin
 -- creating a var inside procedure
 declare cnt int;
@@ -69,6 +75,7 @@ call sp_emp(100);
 
 drop procedure sp_emp;
 
+
 delimiter $$
 create procedure sp_emp(in dept_id_val int, out cnt int )
 begin
@@ -90,6 +97,9 @@ delimiter ;
 set @total := 0;
 call sp_emp(100, @total);
 select @total as total_emp;
+
+
+
 
 
 # FUNCTIONS
@@ -142,9 +152,18 @@ pivot (sum(sales) for yod in ([2020], [2021]) ) as tbl2 */
 
 
 
+# -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+delimiter $$
+create procedure sp_emp2(in salary_val int, dept_value int)
+begin
+select * from employee where salary > salary_val and dept_id = dept_value;
+end $$
+delimiter ;
 
+
+call sp_emp2(500,100);
 
 
 

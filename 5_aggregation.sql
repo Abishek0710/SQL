@@ -73,7 +73,7 @@ group by region, category; # This query is correct
 # interview qn
 select region,category, sum(sales) as tot_sales
 from orders
-group by region, category,tot_sales; 
+group by region, category, tot_sales; 
 # this will also give error as we cannot group on aggregated column
 
 
@@ -99,7 +99,7 @@ group by region, category # in group by we will use column that are not aggregat
 having sum(sales) > 10000 # in having we can use aggregated fn or column in select
 order by tot_sales desc;
 # In having we will use mostly aggregated column 
-# order of execution for the above query is FROM  --> WHERE --> GROUP BY --> HAVING -->	SELECT --> ORDER BY
+# order of execution for the above query is FROM  --> WHERE --> GROUP BY --> SEELECT --> HAVING --> ORDER BY
 # so aggregated columns cannot be used in where clause so we use aggregated columns in having
 # Having and group by both are filter methods but the order of execution is different
 
@@ -132,7 +132,7 @@ order by total_sales desc;
 select count(*) from orders;
 
 select count(city) from orders; # if there is any null in city column it is not counted
-
+select count(distinct city) from orders;
 
 select  city, avg(sales) as average_sales 
 from orders
@@ -140,4 +140,6 @@ group by city
 order by average_sales desc;
 # average(sales) = total sales in the city/ total no of records in that city 
 # if there is any null value in any record of city it is not included in total number of records
+
+
 

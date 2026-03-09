@@ -12,7 +12,7 @@ select o.order_id, o.order_date, r.return_reason from orders o
 inner join returns r on o.order_id = r.order_id;
 
 select o.*, r.return_reason from orders o 
-inner join returns r on o.order_id = r.order_id;
+inner join returns r on o.order_id = r.ord  er_id;
 # returns all the columns from orders tbl and returns reason column from returns tbl
 
 
@@ -57,7 +57,7 @@ select * from dept;
 # we dont need any on condition for croos join
 #It is used when we dont have any common column from both tables
 select * from employee,dept;
-
+select * from dept;
 select * from employee
 cross join dept;
 # we have 10 records in employee and 4 records in dept by cross join we will get 40 records
@@ -98,5 +98,42 @@ left join dept d on e.dept_id = d.dep_id
 union all
 select e.emp_name, e.emp_id, e.dept_id, d.dep_name from employee e
 right join dept d on e.dept_id = d.dep_id;
+
+
+
+
+select e.dept_id,d.dep_name from employee e
+inner join dept d on e.dept_id = d.dep_id
+group by e.dept_id, d.dep_name
+having count(distinct e.salary) = 1;
+
+
+select count(distinct salary) from employee;
+
+
+
+
+# Self Join
+# joining to same table itself
+# we have manager id in same table which is empid of other employee
+select e1.emp_id, e1.emp_name, e2.emp_name as manager_name from employee e1
+inner join employee e2 on e1.manager_id = e2.emp_id;
+
+
+select * from employee;
+select * from employee;
+
+
+# employee salary is greater than manager salary
+select e1.emp_id, e1.emp_name, e1.salary, e2.emp_name as manager_name from employee e1
+inner join employee e2 on e1.manager_id = e2.emp_id
+where e1.salary> e2.salary;
+
+
+# employee age is greater than manager age
+select e1.emp_id, e1.emp_name, e1.salary, e2.emp_name as manager_name from employee e1
+inner join employee e2 on e1.manager_id = e2.emp_id
+where e1.emp_age> e2.emp_age;
+
 
 

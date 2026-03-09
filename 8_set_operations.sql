@@ -163,6 +163,7 @@ select distinct * from order_west;
 
 # fetching common records
 # this only shows the comming records between two tables
+# The USING clause tells the database to join the tables on columns that have the same name in both tables
 select * from order_east
 inner join order_west 
 using ( order_id, region, sales);

@@ -41,7 +41,7 @@ limit 5;
 
 # For numerical, float and date columns we can use operators
 select distinct * from orders 
-where order_date > '5/13/2018' 
+where order_date > '2018-05-13'  
 order by order_date desc;
 
 
@@ -98,7 +98,7 @@ where segment = 'Corporate' order by 5 desc; # 5 is fourth column
 
 
 # getting current date 
-select segment, profit, sales, quantity, current_date() as current_Dte from orders;
+select segment, profit, sales, quantity, current_date() as cur_date from orders;
 
 
 # pattern matching using like operator

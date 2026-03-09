@@ -19,16 +19,20 @@ where e.dept_id = d.dept_id;
 
 # the above query can be done easily using window function without making use of sub queries
 
+
 select *,
 avg(salary) over(partition by dept_id ) as avg_salary # when using window function along with aggregation order by is not mandatory
 from employee
 where dept_id =100;
 # when we use order by we get different results
 
+
+
 select *,
 count(salary) over(partition by dept_id ) as avg_salary # when using window function along with aggregation order by is not mandatory
 from employee
-where dept_id =100;
+where dept_id = 100;
+
 
 
 select *,
@@ -59,7 +63,7 @@ select *,
 sum(salary) over(order by salary desc) as runningsalary
 from employee;
 
-# Always use unique column fro order by while doing aggregation with window function
+# Always use unique column for order by while doing aggregation with window function
 
 
 # ROLLING AGGREGATION
@@ -140,6 +144,24 @@ sum(sales) over(order by order_id rows between unbounded preceding and current r
 sum(sales) over(order by order_id, row_id) as run_sales 
 from orders;
 
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+select * from employee;
+
+select *,
+avg(salary) over(partition by dept_id) as avg_salary
+from employee;
+
+
+
+# rolling sum
+
+
+select *, avg(salary) over(order by emp_id rows between 2 preceding and current row) as rolling_sum
+from employee
 
 
 
