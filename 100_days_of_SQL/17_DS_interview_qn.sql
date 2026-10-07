@@ -93,5 +93,5 @@ FROM orders o1
 JOIN orders o2 ON o1.order_id = o2.order_id
 JOIN products pr1 ON pr1.id = o1.product_id
 JOIN products pr2 ON pr2.id = o2.product_id
-WHERE o1.product_id < o2.product_id
+WHERE o1.product_id < o2.product_id -- to remove duplicate pairs on self join for orders table
 GROUP BY pr1.name, pr2.name;
